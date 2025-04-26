@@ -104,10 +104,10 @@
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
     <Compile Include="Components\FeatureController.cs" />
-    <Compile Include="Components\ItemManager.cs" />
+    <Compile Include="Components\MessageManager.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,8 +149,8 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Item\Index.cshtml" />
-    <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\Edit.cshtml" />
     <Content Include="Views\Settings\Settings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

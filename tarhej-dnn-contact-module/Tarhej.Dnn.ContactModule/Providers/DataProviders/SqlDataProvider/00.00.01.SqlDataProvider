@@ -21,8 +21,8 @@ CREATE TABLE {databaseOwner}{objectQualifier}ContactModule_Items
     Email nvarchar(MAX) NOT NULL,
     MessageContent nvarchar(MAX) NOT NULL,
     Product nvarchar(MAX),
-    ContactDate DATETIME DEFAULT GETDATE(),
-    Status nvarchar(MAX) DEFAULT N'nem megválaszolt' NOT NULL,
+    ContactDate DATETIME NOT NULL,
+    Status nvarchar(MAX) NOT NULL,
     ModuleId int NOT NULL
     )
 GO

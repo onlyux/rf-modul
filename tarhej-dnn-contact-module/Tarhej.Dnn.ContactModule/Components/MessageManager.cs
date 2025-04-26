@@ -17,76 +17,76 @@ using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models;
 
 namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Components
 {
-    internal interface IItemManager
+    internal interface IMessageManager
     {
-        void CreateItem(Item t);
-        void DeleteItem(int itemId, int moduleId);
-        void DeleteItem(Item t);
-        IEnumerable<Item> GetItems(int moduleId);
-        Item GetItem(int itemId, int moduleId);
-        void UpdateItem(Item t);
+        void CreateItem(Message m);
+        void DeleteItem(int MessageId);
+        void DeleteItem(Message m);
+        IEnumerable<Message> GetItems();
+        Message GetItem(int MessageId);
+        void UpdateItem(Message m);
     }
 
-    internal class ItemManager : ServiceLocator<IItemManager, ItemManager>, IItemManager
+    internal class MessageManager : ServiceLocator<IMessageManager, MessageManager>, IMessageManager
     {
-        public void CreateItem(Item t)
+        public void CreateItem(Message m)
         {
             using (IDataContext ctx = DataContext.Instance())
             {
-                var rep = ctx.GetRepository<Item>();
-                rep.Insert(t);
+                var rep = ctx.GetRepository<Message>();
+                rep.Insert(m);
             }
         }
 
-        public void DeleteItem(int itemId, int moduleId)
+        public void DeleteItem(int MessageId)
         {
-            var t = GetItem(itemId, moduleId);
+            var t = GetItem(MessageId);
             DeleteItem(t);
         }
 
-        public void DeleteItem(Item t)
+        public void DeleteItem(Message m)
         {
             using (IDataContext ctx = DataContext.Instance())
             {
-                var rep = ctx.GetRepository<Item>();
-                rep.Delete(t);
+                var rep = ctx.GetRepository<Message>();
+                rep.Delete(m);
             }
         }
 
-        public IEnumerable<Item> GetItems(int moduleId)
+        public IEnumerable<Message> GetItems()
         {
-            IEnumerable<Item> t;
+            IEnumerable<Message> m;
             using (IDataContext ctx = DataContext.Instance())
             {
-                var rep = ctx.GetRepository<Item>();
-                t = rep.Get(moduleId);
+                var rep = ctx.GetRepository<Message>();
+                m = rep.Get();
+            }
+            return m;
+        }
+
+        public Message GetItem(int MessageId)
+        {
+            Message t;
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                var rep = ctx.GetRepository<Message>();
+                t = rep.GetById(MessageId);
             }
             return t;
         }
 
-        public Item GetItem(int itemId, int moduleId)
-        {
-            Item t;
-            using (IDataContext ctx = DataContext.Instance())
-            {
-                var rep = ctx.GetRepository<Item>();
-                t = rep.GetById(itemId, moduleId);
-            }
-            return t;
-        }
-
-        public void UpdateItem(Item t)
+        public void UpdateItem(Message m)
         {
             using (IDataContext ctx = DataContext.Instance())
             {
-                var rep = ctx.GetRepository<Item>();
-                rep.Update(t);
+                var rep = ctx.GetRepository<Message>();
+                rep.Update(m);
             }
         }
 
-        protected override System.Func<IItemManager> GetFactory()
+        protected override System.Func<IMessageManager> GetFactory()
         {
-            return () => new ItemManager();
+            return () => new MessageManager();
         }
     }
 }
