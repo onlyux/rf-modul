@@ -79,7 +79,8 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                 case "Additem":
                     return RedirectToAction("Additem");
                 default:
-                    var messages = MessageManager.Instance.GetItems();
+                    var messages = MessageManager.Instance.GetItems()
+                        .OrderByDescending(m => m.ContactDate);
                     return View(messages);
             }
         }
