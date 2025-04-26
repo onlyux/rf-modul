@@ -7,9 +7,12 @@
 <table>
     <thead>
         <tr>
-            <th>Üzenet ID</th>
-            <th>Üzenet tartalma</th>
-            <th>Termék</th>
+            <th>Üzenetfelvétel dátuma</th>
+            <th>Tárgy</th>
+            <th>Vezetéknév</th>
+            <th>Keresztnév</th>
+            <th>Email-cím</th>
+            <th>Státusz</th>
             <th>Funkciók</th>
         </tr>
     </thead>
@@ -17,12 +20,16 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.MessageId</td>
-                <td id="message-content">@item.MessageContent</td>
-                <td>@item.Product</td>
+                <td>@item.ContactDate</td>
+                <td>@item.Subject</td>
+                <td>@item.LastName</td>
+                <td>@item.FirstName</td>
+                <td>@item.Email</td>
+                <td>@item.Status</td>
                 <td>
                     <a href="@Url.Action("Delete", "Message", new { MessageId = item.MessageId })">Törlés</a>
                     <a href="@Url.Action("GetMessage","Message", new { MessageId = item.MessageId })">Megnéz</a>
+                    <a href="@Url.Action("Edit","Message", new {MessageId = item.MessageId })">Státusz szerkesztése</a>
                 </td>
             </tr>
         }

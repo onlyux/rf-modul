@@ -6,6 +6,21 @@
 @using System.Collections.Generic
 @using DotNetNuke.Web.Mvc.Helpers
 
-<h2>View</h2>
-
-<p></p>
+<h2>Üzenet</h2>
+<p>Dátum</p>
+<p>@Model.ContactDate</p>
+<p>Vezetéknév</p>
+<p>@Model.LastName</p>
+<p>Keresztnév</p>
+<p>@Model.FirstName</p>
+<p>Email</p>
+<p>@Model.Email</p>
+<p>Státusz</p>
+<p>@Model.Status</p>
+<a href="@Url.Action("Edit","Message", new {MessageId = Model.MessageId })">Státusz szerkesztése</a>
+<p>Tárgy</p>
+<p>@Model.Subject</p>
+<p>Termék</p>
+<p>@Model.Product</p>
+<p>Üzenet</p>
+<p>@Model.MessageContent</p>

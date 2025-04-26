@@ -8,22 +8,35 @@
         <div class="dnnFormExpandContent dnnRight "><a href="#">@Dnn.LocalizeString("ExpandAll")</a></div>
 
         <h2 id="dnnSitePanel-BasicSettings" class="dnnFormSectionHead dnnClear">
-            <a href="#" class="dnnSectionExpanded">Új üzenet küldése</a>
+            <a href="#" class="dnnSectionExpanded">Státusz szerkesztése</a>
         </h2>
         <fieldset>
             <div class="dnnFormItem">
-                <div><label for="MessageContent">Üzenet</label></div>
-                @Html.TextArea("MessageContent", Model.MessageContent)
-            </div>
-            <div class="dnnFormItem">
-                <div><label for="Product">Termék</label></div>
-                @Html.TextBoxFor(m => m.Product)
+                <div class="dnnLabel" style="position: relative;">
+                    @Html.LabelFor(m => Model.Status, new { @class = "col-md-2 control-label" })
+                </div>
+                @Html.DropDownListFor(
+                    m => Model.Status,
+                    new SelectList(new[]
+                    {
+                        new { Value = "megválaszolva", Text = "megválaszolva" },
+                        new { Value = "nem megválaszolt", Text = "nem megválaszolt" },
+                    }, "Value", "Text", Model.Status),
+                    new { @class = "form-control" }
+                )
             </div>
             @Html.HiddenFor(m => m.ModuleId)
+            @Html.HiddenFor(m => m.LastName)
+            @Html.HiddenFor(m => m.FirstName)
+            @Html.HiddenFor(m => m.Subject)
+            @Html.HiddenFor(m => m.Product)
+            @Html.HiddenFor(m => m.MessageContent)
+            @Html.HiddenFor(m => m.ContactDate)
+            @Html.HiddenFor(m => m.Email)
         </fieldset>
     </div>
-    <button type="submit" class="dnnPrimaryAction">@Dnn.LocalizeString("Submit")</button>
-    <a id="cancelEdit" href="#" class="dnnSecondaryAction">@Dnn.LocalizeString("Cancel")</a>
+    <button type="submit" class="dnnPrimaryAction">Kész</button>
+    <a id="cancelEdit" href="#" class="dnnSecondaryAction">Mégse</a>
 </div>
 
 <script type="text/javascript">
