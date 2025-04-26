@@ -44,20 +44,26 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 
         [HttpPost]
         [DotNetNuke.Web.Mvc.Framework.ActionFilters.ValidateAntiForgeryToken]
-        public ActionResult Edit(Item item)
+        public ActionResult Edit(Message message)
         {
-            if (item.MessageId == -1)
+            if (message.MessageId == -1)
             {
 
-                ItemManager.Instance.CreateItem(item);
+                MessageManager.Instance.CreateItem(message);
             }
             else
             {
-                var existingItem = ItemManager.Instance.GetItem(item.MessageId);
-                existingItem.MessageContent = item.MessageContent;
-                existingItem.Product = item.Product;
+                var existingItem = MessageManager.Instance.GetItem(message.MessageId);
+                existingItem.MessageContent = message.MessageContent;
+                existingItem.Product = message.Product;
+                existingItem.Status = message.Status;
+                existingItem.FirstName = message.FirstName;
+                existingItem.LastName = message.LastName;
+                existingItem.Subject = message.Subject;
+                existingItem.Email = message.Email;
 
-                ItemManager.Instance.UpdateItem(existingItem);
+
+                MessageManager.Instance.UpdateItem(existingItem);
             }
 
             return RedirectToDefaultRoute();
@@ -65,35 +71,33 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         public ActionResult Index()
         {
             // Retrieve the DefaultView setting
-            var defaultView = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("Dnn.Tarhej.MessageModul_DefaultView", "Index");
+            var defaultView = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("Dnn.Tarhej.ContactModule_DefaultView", "Index");
 
             // Redirect to the appropriate action based on the setting
             switch (defaultView)
             {
                 case "Additem":
                     return RedirectToAction("Additem");
-                case "GetMessage":
-                    return RedirectToAction("GetMessage");
                 default:
-                    var items = ItemManager.Instance.GetItems();
-                    return View(items);
+                    var messages = MessageManager.Instance.GetItems();
+                    return View(messages);
             }
         }
-        public ActionResult Additem()
+        public ActionResult AddItem()
         {
-            return View(new Item());
+            return View(new Message());
         }
 
         [HttpPost]
-        public ActionResult AddItem(Item t)
+        public ActionResult AddItem(Message m)
         {
-            ItemManager.Instance.CreateItem(t);
+            MessageManager.Instance.CreateItem(m);
             return RedirectToDefaultRoute();
         }
         public ActionResult GetMessage(int MessageId)
         {
-            var item = ItemManager.Instance.GetItem(MessageId);
-            return View(item);
+            var message = MessageManager.Instance.GetItem(MessageId);
+            return View(message);
         }
     }
 }

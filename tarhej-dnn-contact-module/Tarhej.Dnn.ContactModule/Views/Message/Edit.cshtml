@@ -1,4 +1,4 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Item>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Message>
 
 @using System.Collections.Generic
 @using DotNetNuke.Web.Mvc.Helpers
@@ -8,20 +8,16 @@
         <div class="dnnFormExpandContent dnnRight "><a href="#">@Dnn.LocalizeString("ExpandAll")</a></div>
 
         <h2 id="dnnSitePanel-BasicSettings" class="dnnFormSectionHead dnnClear">
-            <a href="#" class="dnnSectionExpanded">@Dnn.LocalizeString("BasicSettings")</a>
+            <a href="#" class="dnnSectionExpanded">Új üzenet küldése</a>
         </h2>
         <fieldset>
             <div class="dnnFormItem">
-                <div><label for="itemName">@Dnn.LocalizeString("lblName")</label></div>
-                @Html.TextBoxFor(m => m.ItemName)
+                <div><label for="MessageContent">Üzenet</label></div>
+                @Html.TextArea("MessageContent", Model.MessageContent)
             </div>
             <div class="dnnFormItem">
-                <div><label for="itemDescription">@Dnn.LocalizeString("lblDescription")</label></div>
-                @Html.TextArea("itemDescription", Model.ItemDescription)
-            </div>
-            <div class="dnnFormItem">
-                <div><label for="itemUser">@Dnn.LocalizeString("lblAssignedUser")</label></div>
-                @Html.DropDownListFor(m => m.AssignedUserId, (IEnumerable<SelectListItem>)ViewBag.Users, "Choose...")
+                <div><label for="Product">Termék</label></div>
+                @Html.TextBoxFor(m => m.Product)
             </div>
             @Html.HiddenFor(m => m.ModuleId)
         </fieldset>

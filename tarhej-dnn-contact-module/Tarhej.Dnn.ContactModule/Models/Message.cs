@@ -27,7 +27,7 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models
     [Scope("ModuleId")]
     public class Message
     {
-        public int ItemId { get; set; } = -1;
+        public int MessageId { get; set; } = -1;
 
         public string FirstName { get; set; }
 

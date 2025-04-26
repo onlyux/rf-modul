@@ -152,6 +152,8 @@
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
     <Content Include="Views\Settings\Settings.cshtml" />
+    <Content Include="Views\Message\GetMessage.cshtml" />
+    <Content Include="Views\Message\AddItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
