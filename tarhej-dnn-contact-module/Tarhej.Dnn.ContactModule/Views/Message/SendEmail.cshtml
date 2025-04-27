@@ -1,0 +1,32 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.EmailViewModel>
+@{
+    ViewBag.Title = "Email küldése";
+}
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form action="@Url.Action("SendEmail", "Message")" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="Email">Címzett Email</label>
+        <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+    </div>
+    <div class="form-group">
+        <label for="Subject">Tárgy</label>
+        <input type="text" id="Subject" name="Subject" class="form-control" value="@Model.Subject" required />
+    </div>
+    <div class="form-group">
+        <label for="Message">Üzenet</label>
+        <textarea id="Message" name="Message" class="form-control" rows="5" required>@Model.Message</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Küldés</button>
+</form>

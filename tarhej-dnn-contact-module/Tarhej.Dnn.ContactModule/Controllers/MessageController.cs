@@ -20,6 +20,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Components;
 using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models;
+using System.Net.Mail;
 
 namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 {
@@ -105,6 +106,43 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         {
             var message = MessageManager.Instance.GetItem(MessageId);
             return View(message);
+        }
+
+        public ActionResult SendEmail()
+        {
+            return View(new EmailViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult SendEmail(EmailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var email = new MailMessage();
+                    email.From = new MailAddress("tarhejhu@gmail.com");
+                    email.To.Add(model.Email);
+                    email.Subject = model.Subject;
+                    email.Body = model.Message;
+                    email.IsBodyHtml = false;
+
+                    var smtpClient = new SmtpClient("smtp.gmail.com")
+                    {
+                        UseDefaultCredentials = false,
+                        Port = 587,
+                        Credentials = new System.Net.NetworkCredential("tarhejhu@gmail.com", "solu xhge hmxk sbtw"),
+                        EnableSsl = true
+                    };
+                    smtpClient.Send(email);
+                    ViewBag.Message = "Email sikeresen elküldve";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Hiba történt az email küldése során: " + ex.Message;
+                }
+            }
+            return View(model);
         }
     }
 }
