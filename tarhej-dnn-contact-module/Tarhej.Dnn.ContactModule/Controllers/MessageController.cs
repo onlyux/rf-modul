@@ -127,7 +127,7 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
             }
             MessageManager.Instance.CreateItem(m);
             ViewBag.Message = "Üzenet sikeresen elküldve";
-            return RedirectToDefaultRoute();
+            return View(new Message());
         }
 
         public ActionResult GetMessage(int MessageId)
