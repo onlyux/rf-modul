@@ -21,6 +21,7 @@ using System.Web.Mvc;
 using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Components;
 using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models;
 using System.Net.Mail;
+using DotNetNuke.Security;
 
 namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 {
@@ -29,12 +30,20 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
     {
         public ActionResult Delete(int MessageId)
         {
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+            }
             MessageManager.Instance.DeleteItem(MessageId);
             return RedirectToDefaultRoute();
         }
 
         public ActionResult Edit(int MessageId = -1)
         {
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+            }
             var item = (MessageId == -1)
                  ? new Message { }
                  : MessageManager.Instance.GetItem(MessageId);
@@ -44,8 +53,13 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 
         [HttpPost]
         [DotNetNuke.Web.Mvc.Framework.ActionFilters.ValidateAntiForgeryToken]
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
         public ActionResult Edit(Message message)
         {
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+            }
             if (message.MessageId == -1)
             {
 
@@ -68,6 +82,8 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 
             return RedirectToDefaultRoute();
         }
+
+
         public ActionResult Index()
         {
             // Retrieve the DefaultView setting
@@ -79,6 +95,10 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                 case "Additem":
                     return RedirectToAction("Additem");
                 default:
+                    if (!IsUserAdmin())
+                    {
+                        return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+                    }
                     var messages = MessageManager.Instance.GetItems()
                         .OrderByDescending(m => m.ContactDate);
                     return View(messages);
@@ -99,23 +119,50 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         [HttpPost]
         public ActionResult AddItem(Message m)
         {
+            var currentUser = UserController.Instance.GetCurrentUserInfo();
+            if (currentUser == null || currentUser.UserID == -1)
+            {
+                ViewBag.Error = "Csak bejelentkezett felhasználók küldhetnek üzenetet";
+                return View(m);
+            }
             MessageManager.Instance.CreateItem(m);
+            ViewBag.Message = "Üzenet sikeresen elküldve";
             return RedirectToDefaultRoute();
         }
+
         public ActionResult GetMessage(int MessageId)
         {
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+            }
             var message = MessageManager.Instance.GetItem(MessageId);
             return View(message);
         }
 
-        public ActionResult SendEmail()
+        public ActionResult SendEmail(string subject, string email)
         {
-            return View(new EmailViewModel());
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+            }
+            var model = new EmailViewModel
+            {
+                Email = email,
+                Subject = subject,
+            };
+            return View(model);
         }
+
 
         [HttpPost]
         public ActionResult SendEmail(EmailViewModel model)
         {
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -143,6 +190,12 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                 }
             }
             return View(model);
+        }
+
+        private bool IsUserAdmin()
+        {
+            var currentUser = UserController.Instance.GetCurrentUserInfo();
+            return currentUser != null && (currentUser.IsSuperUser || currentUser.IsAdmin);
         }
     }
 }

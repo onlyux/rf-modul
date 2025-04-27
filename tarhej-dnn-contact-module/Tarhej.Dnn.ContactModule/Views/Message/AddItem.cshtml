@@ -2,8 +2,14 @@
 
 @using System.Collections.Generic
 @using DotNetNuke.Web.Mvc.Helpers
-@{
 
+@if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
 }
 
 <h2>Üzenetküldés</h2>

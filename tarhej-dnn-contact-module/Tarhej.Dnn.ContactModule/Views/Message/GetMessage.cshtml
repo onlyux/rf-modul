@@ -1,10 +1,12 @@
 ﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Message>
 
+
+@using System.Collections.Generic
+@using DotNetNuke.Web.Mvc.Helpers
+
 @{
     ViewBag.Title = "Üzenet megtekintés";
 }
-@using System.Collections.Generic
-@using DotNetNuke.Web.Mvc.Helpers
 
 <h2>Üzenet</h2>
 <p>Dátum</p>
@@ -24,3 +26,7 @@
 <p>@Model.Product</p>
 <p>Üzenet</p>
 <p>@Model.MessageContent</p>
+
+<h3>Válasz email küldése</h3>
+
+<a href="@Url.Action("SendEmail", "Message", new { email = Model.Email, subject = "VÁLASZ: " + Model.Subject })" class="btn btn-primary">Email küldése</a>
