@@ -2,9 +2,22 @@
 
 @using System.Collections.Generic
 @using DotNetNuke.Web.Mvc.Helpers
+@{
+
+}
 
 <h2>AddItem</h2>
-
+@if (Model == null)
+{
+    <p>Gatya</p>
+}
+else
+{
+    <p>Nem gatya</p>
+    <p>név: @Model.FirstName</p>
+    <p>vezetéknév: @Model.LastName</p>
+    <p>email: @Model.Email</p>
+}
 
 <form action="@Url.Action("Additem", "Message")" method="post">
     <div class="form-group">

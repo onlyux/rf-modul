@@ -34,7 +34,6 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 
         public ActionResult Edit(int MessageId = -1)
         {
-
             var item = (MessageId == -1)
                  ? new Message { }
                  : MessageManager.Instance.GetItem(MessageId);
@@ -86,7 +85,14 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         }
         public ActionResult AddItem()
         {
-            return View(new Message());
+            var currentUser = UserController.Instance.GetCurrentUserInfo();
+            var message = new Message
+            {
+                FirstName = currentUser?.FirstName,
+                LastName = currentUser?.LastName,
+                Email = currentUser?.Email
+            };
+            return View(message);
         }
 
         [HttpPost]
