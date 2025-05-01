@@ -29,7 +29,7 @@
                 <td class="funkciok">
                     <a href="@Url.Action("Delete", "Message", new { MessageId = item.MessageId })">Üzenet törlése</a>
                     <a href="@Url.Action("GetMessage","Message", new { MessageId = item.MessageId })">Részletek</a>
-                    <a href="@Url.Action("Edit","Message", new {MessageId = item.MessageId })">Státusz szerkesztése</a>
+                    <a href="@Url.Action("Edit","Message", new {ctl="Edit",MessageId = item.MessageId })">Státusz szerkesztése</a>
                 </td>
             </tr>
         }

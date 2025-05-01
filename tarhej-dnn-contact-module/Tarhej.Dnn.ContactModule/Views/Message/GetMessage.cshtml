@@ -3,6 +3,8 @@
 
 @using System.Collections.Generic
 @using DotNetNuke.Web.Mvc.Helpers
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
 
 @{
     ViewBag.Title = "Üzenet megtekintés";
@@ -18,10 +20,12 @@
 </div>
 <div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_adatok">
     <p>Email: @Model.Email</p>
-    <p>Státusz: @Model.Status <a class="statusz_szerkesztese_link" href="@Url.Action("Edit","Message", new {MessageId = Model.MessageId })">Státusz szerkesztése</a></p>
+    <p>Státusz: @Model.Status <a class="statusz_szerkesztese_link" href="@Url.Action("Edit","Message", new {ctl="Edit",MessageId = Model.MessageId })">Státusz szerkesztése</a></p>
+
+
 </div>
 <div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_fontos_adatok">
-    <p>Tárgy: <@Model.Subject</p>
+    <p>Tárgy: @Model.Subject</p>
     <p>Termék: @Model.Product</p>
 </div>
 <p class="uzenet">@Model.MessageContent</p>
@@ -29,8 +33,6 @@
 <h3 class="ugyfelszolgalat_pixel_cim">Válasz email küldése</h3>
 
 <a href="@Url.Action("SendEmail", "Message", new { email = Model.Email, subject = "VÁLASZ: " + Model.Subject })" class="btn btn-primary">Email küldése</a>
-
-
 <style>
     .ugyfelszolgalat_beerkezett_uzenet {
         display: flex;
