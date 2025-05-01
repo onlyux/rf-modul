@@ -99,8 +99,7 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                     {
                         return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
                     }
-                    var messages = MessageManager.Instance.GetItems()
-                        .OrderByDescending(m => m.ContactDate);
+                    var messages = MessageManager.Instance.GetItems();
                     int totalMessages = messages.Count();
                     int unansweredMessages = messages.Count(m => m.Status == "nem megválaszolt");
                     ViewBag.TotalMessages = totalMessages;
@@ -201,6 +200,31 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         {
             var currentUser = UserController.Instance.GetCurrentUserInfo();
             return currentUser != null && (currentUser.IsSuperUser || currentUser.IsAdmin);
+        }
+
+        public ActionResult SortMessages(bool unansweredFirst = false)
+        {
+            if (!IsUserAdmin())
+            {
+                return new HttpStatusCodeResult(403, "Hozzáférés megtagadva: csak adminisztrátorok férhetnek hozzá");
+
+            }
+            var messages = MessageManager.Instance.GetItems();
+
+            if (unansweredFirst)
+            {
+                messages = messages.OrderByDescending(m => m.Status == "nem megválaszolt").ThenByDescending(m => m.ContactDate);
+            }
+            else
+            {
+                messages = messages.OrderByDescending(m => m.ContactDate);
+            }
+            int totalMessages = messages.Count();
+            int unansweredMessages = messages.Count(m => m.Status == "nem megválaszolt");
+            ViewBag.TotalMessages = totalMessages;
+            ViewBag.UnansweredMessages = unansweredMessages;
+
+            return View("Index", messages);
         }
     }
 }

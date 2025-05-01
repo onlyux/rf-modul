@@ -6,7 +6,8 @@
 <a href="@Url.Action("SendEmail","Message")">Send email </a>
 <p>Összes üzenet: @ViewBag.totalMessages</p>
 <p>Nem megválaszolt üzenetek: @ViewBag.unansweredMessages</p>
-<p></p>
+<a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = true })" class="btn btn-primary">Rendezés státusz szerint</a>
+<a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = false })" class="btn btn-primary">Rendezés beküldési idő szerint</a>
 <table>
     <thead>
         <tr>
