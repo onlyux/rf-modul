@@ -8,6 +8,7 @@
 <p>Nem megválaszolt üzenetek: @ViewBag.unansweredMessages</p>
 <a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = true })" class="btn btn-primary">Rendezés státusz szerint</a>
 <a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = false })" class="btn btn-primary">Rendezés beküldési idő szerint</a>
+<a href="@Url.Action("Index", "Message")" class="btn btn-primary">Frissítés</a>
 <table>
     <thead>
         <tr>
