@@ -22,6 +22,8 @@ using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Components;
 using Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models;
 using System.Net.Mail;
 using DotNetNuke.Security;
+using Microsoft.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 {
@@ -129,7 +131,18 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                 ViewBag.Error = "Csak bejelentkezett felhasználók küldhetnek üzenetet";
                 return View(m);
             }
+            //Captcha
+            var response = Request["g-recaptcha-response"];
+            var secretKey = "6LdRCysrAAAAAF5tRgbb6bNfeUyy2jA74E_WsEVe";
+            var client = new System.Net.WebClient();
+            var result = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={response}");
+            var captchaResult = JsonConvert.DeserializeObject<dynamic>(result);
             MessageManager.Instance.CreateItem(m);
+            if (captchaResult.success != true)
+            {
+                ViewBag.Error = "A CAPTCHA ellenőrzése sikertelen. Kérlek próbáld újra.";
+                return View(m);
+            }
             ViewBag.Message = "Üzenet sikeresen elküldve";
             return View(new Message());
         }

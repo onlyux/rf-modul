@@ -5,8 +5,11 @@
 @using Hotcakes.CommerceDTO.v1
 @using Hotcakes.CommerceDTO.v1.Catalog;
 @using Hotcakes.CommerceDTO.v1.Client;
+@using Microsoft.Web.Helpers
+
+
 @{
-    ViewBag.Title = "Email küldése";
+ViewBag.Title = "Email küldése";
 
     string url = "http://" + DotNetNuke.Entities.Portals.PortalSettings.Current.PortalAlias.HTTPAlias + "/";
     string key = "1-c4de6d11-f89c-40e7-82d8-cf7a1365cdd2";
@@ -82,8 +85,8 @@
                 <label for="Product">Válaszd ki a kapcsolódó terméket (opcionális)</label>
                 <select id="Product" name="Product" class="form-control">
                     <option value="nincs termék">Nem termékkel kapcsolatos</option>
-                    @foreach (var termek in Products) 
-                    { 
+                    @foreach (var termek in Products)
+                    {
                         <option value="@termek" @(termek == Model.Product ? "selected" : "")>@termek</option>
                     }
                 </select>
@@ -94,20 +97,29 @@
             </div>
             <div class="form_egy_tomb">
                 <div>
-                    <!--captcha -->
-                </div>
-                <div class="form_egyoszlopba_input">
-                    <!--karakterek leírásának input -->
-                    <!--captcha ellenorzo masodlagos gomb -->
+                    <div class="g-recaptcha" data-sitekey="6LdRCysrAAAAAH9vQ0ML1d2MEdQiHGiY8cOUQHjV"></div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary form_bejelentes_gomb">Submit</button>
         </form>
     </div>
 </div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function (event) {
+            const errorMessage = document.querySelector(".alert-danger");
+            if (errorMessage) {
+                reloadCaptcha();
+            }
+        });
+    });
 
-
-
+    function reloadCaptcha() {
+        grecaptcha.reset();
+    }
+</script>
 <style>
     .ugyfelszolgalat_kezdokep {
         width: 100%;
