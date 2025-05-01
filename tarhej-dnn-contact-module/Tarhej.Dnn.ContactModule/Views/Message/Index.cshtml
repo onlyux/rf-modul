@@ -2,7 +2,6 @@
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
 
-
 <a href="@Url.Action("Additem","Message")">Add item </a>
 <a href="@Url.Action("SendEmail","Message")">Send email </a>
 <table>
@@ -27,15 +26,17 @@
                 <td>@item.FirstName</td>
                 <td>@item.Email</td>
                 <td>@item.Status</td>
-                <td>
-                    <a href="@Url.Action("Delete", "Message", new { MessageId = item.MessageId })">Törlés</a>
-                    <a href="@Url.Action("GetMessage","Message", new { MessageId = item.MessageId })">Megnéz</a>
+                <td class="funkciok">
+                    <a href="@Url.Action("Delete", "Message", new { MessageId = item.MessageId })">Üzenet törlése</a>
+                    <a href="@Url.Action("GetMessage","Message", new { MessageId = item.MessageId })">Részletek</a>
                     <a href="@Url.Action("Edit","Message", new {MessageId = item.MessageId })">Státusz szerkesztése</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
 <style>
     table, tr, td, th {
         padding: 10px;
@@ -45,4 +46,30 @@
         width: 20px;
         text-overflow: clip;
     }
+
+    table {
+        padding: 10px;
+        color: #160f32;
+    }
+
+    thead > tr > th {
+        background-color: #5d3fd3;
+        color: #f4e1d2;
+        margin: 0;
+    }
+
+    .funkciok {
+        background-color: #F4E1D2;
+    }
+
+    td > a {
+        padding: 0 15px;
+        color: #5D3FD3;
+        text-decoration: none;
+    }
+
+        td > a:hover {
+            color: #160f32;
+            transition: color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+        }
 </style>
