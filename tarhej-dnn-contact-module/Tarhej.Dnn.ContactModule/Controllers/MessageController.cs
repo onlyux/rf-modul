@@ -30,6 +30,7 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
     [DnnHandleError]
     public class MessageController : DnnController
     {
+        private readonly string captchaKey = "6LdRCysrAAAAAF5tRgbb6bNfeUyy2jA74E_WsEVe";
         public ActionResult Delete(int MessageId)
         {
             if (!IsUserAdmin())
@@ -133,7 +134,7 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
             }
             //Captcha
             var response = Request["g-recaptcha-response"];
-            var secretKey = "6LdRCysrAAAAAF5tRgbb6bNfeUyy2jA74E_WsEVe";
+            var secretKey = captchaKey;
             var client = new System.Net.WebClient();
             var result = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={response}");
             var captchaResult = JsonConvert.DeserializeObject<dynamic>(result);
