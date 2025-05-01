@@ -4,6 +4,9 @@
 
 <a href="@Url.Action("Additem","Message")">Add item </a>
 <a href="@Url.Action("SendEmail","Message")">Send email </a>
+<p>Összes üzenet: @ViewBag.totalMessages</p>
+<p>Nem megválaszolt üzenetek: @ViewBag.unansweredMessages</p>
+<p></p>
 <table>
     <thead>
         <tr>

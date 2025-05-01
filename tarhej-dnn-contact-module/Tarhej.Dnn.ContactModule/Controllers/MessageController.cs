@@ -101,6 +101,11 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                     }
                     var messages = MessageManager.Instance.GetItems()
                         .OrderByDescending(m => m.ContactDate);
+                    int totalMessages = messages.Count();
+                    int unansweredMessages = messages.Count(m => m.Status == "nem megválaszolt");
+                    ViewBag.TotalMessages = totalMessages;
+                    ViewBag.UnansweredMessages = unansweredMessages;
+
                     return View(messages);
             }
         }
