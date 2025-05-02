@@ -100,7 +100,7 @@ ViewBag.Title = "Email küldése";
                     <div class="g-recaptcha" data-sitekey="6LdRCysrAAAAAH9vQ0ML1d2MEdQiHGiY8cOUQHjV"></div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary form_bejelentes_gomb">Submit</button>
+            <button onclick="ScrollToTop()" id="formsubmit" type="submit" class="btn btn-primary form_bejelentes_gomb">Submit</button>
         </form>
     </div>
 </div>
@@ -119,6 +119,14 @@ ViewBag.Title = "Email küldése";
     function reloadCaptcha() {
         grecaptcha.reset();
     }
+
+    function ScrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
 </script>
 <style>
     .ugyfelszolgalat_kezdokep {
