@@ -55,7 +55,6 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         }
 
         [HttpPost]
-        [DotNetNuke.Web.Mvc.Framework.ActionFilters.ValidateAntiForgeryToken]
         public ActionResult Edit(Message message)
         {
             if (!IsUserAdmin())
