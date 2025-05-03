@@ -11,6 +11,7 @@
 {
     <div class="alert alert-danger">@ViewBag.Error</div>
 }
+
 <h2 class="ugyfelszolgalat_kezdoszoveg">Válasz e-mail küldése</h2>
 <div class="email_visszakuldes_form">
     <form action="@Url.Action("SendEmail", "Message")" method="post">
@@ -34,57 +35,58 @@
 </div>
 <style>
     .email_visszakuldes_form {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        background-color: #5D3FD3;
-        padding-top: 30px;
-    }
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    background-color: #5D3FD3;
+    padding-top: 30px;
+}
 
-    .email_visszakuldes_form > .fejlec {
-        display: flex;
-        width: 60%;
-        justify-content: space-between;
-        margin-left: 100px;
-    }
+.email_visszakuldes_form > .fejlec {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    margin-left: 100px;
+}
 
-    .email_visszakuldes_form > .fejlec > .form-group {
-        display: flex;
-        flex-direction: column;
-    }
+.email_visszakuldes_form > .fejlec > .form-group {
+    display: flex;
+    flex-direction: column;
+}
 
-    .email_visszakuldes_form > .form-group {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.email_visszakuldes_form > .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
-    .email_visszakuldes_form > .fejlec > .form-group > input {
-        width: 300px;
-        margin: 5px 0 10px 0;
-        padding: 10px;
-        background-color: #F8F9FA;
-    }
+.email_visszakuldes_form > .fejlec > .form-group > input {
+    width: 300px;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+    background-color: #F8F9FA;
+}
 
-    .email_visszakuldes_form > .fejlec > .form-group > label {
-        margin-top: 15px;
-        color: #F8F9FA;
-    }
+.email_visszakuldes_form > .fejlec > .form-group > label {
+    margin-top: 15px;
+    color: #F8F9FA;
+}
 
-    .email_visszakuldes_form > .form-group > label {
-        margin: 15px 0 0 100px;
-        color: #F8F9FA;
-    }
+.email_visszakuldes_form > .form-group > label {
+    margin: 15px 0 0 100px;
+    color: #F8F9FA;
+}
 
-    .email_visszakuldes_form > .form-group > textarea {
-        width: 60%;
-        height: 100vh;
-        margin: 5px 0 10px 100px;
-    }
+.email_visszakuldes_form > .form-group > textarea {
+    width: 60%;
+    height: 100vh;
+    margin: 5px 0 10px 100px;
+}
 
-    .email_visszakuldes_gomb {
-        width: 60%;
-        margin: 15px 0 15px 100px;
-    }
+.email_visszakuldes_gomb {
+    width: 60%;
+    margin: 15px 0 15px 100px;
+}
+
 </style>

@@ -24,6 +24,7 @@ using System.Net.Mail;
 using DotNetNuke.Security;
 using Microsoft.Web.Helpers;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
 {
@@ -194,7 +195,7 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
                     {
                         UseDefaultCredentials = false,
                         Port = 587,
-                        Credentials = new System.Net.NetworkCredential("tarhejhu@gmail.com", "solu xhge hmxk sbtw"),
+                        Credentials = new System.Net.NetworkCredential("tarhejhu@gmail.com", "kloo hrjd kzsm gnor"),
                         EnableSsl = true
                     };
                     smtpClient.Send(email);

@@ -9,7 +9,7 @@
 
 
 @{
-ViewBag.Title = "Email küldése";
+    ViewBag.Title = "Email küldése";
 
     string url = "http://" + DotNetNuke.Entities.Portals.PortalSettings.Current.PortalAlias.HTTPAlias + "/";
     string key = "1-c4de6d11-f89c-40e7-82d8-cf7a1365cdd2";
@@ -129,119 +129,119 @@ ViewBag.Title = "Email küldése";
 
 </script>
 <style>
-    .captcha_ellenorzes {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.captcha_ellenorzes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .ugyfelszolgalat_kezdokep {
-        font-size: 50px;
-        width: 100%;
-        height: 35vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        color: #160f32;
-        background-color: #5D3FD3;
-    }
+.ugyfelszolgalat_kezdokep {
+    font-size: 50px;
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #160f32;
+    background-color: #5D3FD3;
+}
 
-    .ugyfelszolgalat_layout {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+.ugyfelszolgalat_layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
-    .ugyfelszolgalat_info {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        padding: 10px 30px;
-    }
+.ugyfelszolgalat_info {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px 30px;
+}
 
-    .ugyfelszolgalat_info_cim {
-        text-align: center;
-        font-size: 30px;
-        color: #5D3FD3;
-    }
+.ugyfelszolgalat_info_cim {
+    text-align: center;
+    font-size: 30px;
+    color: #5D3FD3;
+}
 
-    .ugyfelszolgalat_info_szoveg {
-        text-align: center;
-        color: #5D3FD3;
-        width: 90%;
-    }
+.ugyfelszolgalat_info_szoveg {
+    text-align: center;
+    color: #5D3FD3;
+    width: 90%;
+}
 
-    .ugyfelszolgalat_bevezeto {
-        margin-bottom: 30vh;
-        width: 100%;
-    }
+.ugyfelszolgalat_bevezeto {
+    margin-bottom: 30vh;
+    width: 100%;
+}
 
-    .ugyfelszolgalat_info_egy_lepes {
-        display: flex;
-        justify-content: space-between;
-    }
+.ugyfelszolgalat_info_egy_lepes {
+    display: flex;
+    justify-content: space-between;
+}
 
-    .ugyfelszolgalat_info_kep {
-        width: 100%;
-        height: 50vh;
-        background-color: #ff0000;
-        background-size: cover;
-        background-position: center;
-        background-image: url("@Url.Content("~/Portals/0/Images/telefonos_ember_support.svg")")
-    }
+.ugyfelszolgalat_info_kep {
+    width: 100%;
+    height: 50vh;
+    background-color: #ff0000;
+    background-size: cover;
+    background-position: center;
+    background-image: url("@Url.Content("~/Portals/0/Images/telefonos_ember_support.svg")")
+}
 
-    .ugyfelszolgalat_form {
-        background-color: #5D3FD3;
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        padding: 30px 100px;
-    }
+.ugyfelszolgalat_form {
+    background-color: #5D3FD3;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 30px 100px;
+}
 
-    .form_egy_tomb {
-        display: flex;
-        justify-content: space-between;
-    }
+.form_egy_tomb {
+    display: flex;
+    justify-content: space-between;
+}
 
-    .form_egyoszlopba_input {
-        display: flex;
-        flex-direction: column;
-    }
+.form_egyoszlopba_input {
+    display: flex;
+    flex-direction: column;
+}
 
-    .ugyfelszolgalat_form_group {
-        display: flex;
-        flex-direction: column;
-    }
+.ugyfelszolgalat_form_group {
+    display: flex;
+    flex-direction: column;
+}
 
-    .ugyfelszolgalat_form_group > input {
-        width: 300px;
-        margin: 5px 0 10px 0;
-        padding: 10px;
-        background-color: #F8F9FA;
-    }
+.ugyfelszolgalat_form_group > input {
+    width: 300px;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+    background-color: #F8F9FA;
+}
 
-    .ugyfelszolgalat_form_group > label {
-        margin-top: 15px;
-        color: #F8F9FA;
-    }
+.ugyfelszolgalat_form_group > label {
+    margin-top: 15px;
+    color: #F8F9FA;
+}
 
-    .ugyfelszolgalat_form_group > textarea {
-        width: 100%;
-        height: 100vh;
-        margin: 5px 0 10px 0;
-    }
+.ugyfelszolgalat_form_group > textarea {
+    width: 100%;
+    height: 100vh;
+    margin: 5px 0 10px 0;
+}
 
-    .ugyfelszolgalat_form_group > #Product {
-        width: 100%;
-    }
+.ugyfelszolgalat_form_group > #Product {
+    width: 100%;
+}
 
-    .form_bejelentes_gomb {
-        margin-top: 15px;
-        width: 100%;
-    }
+.form_bejelentes_gomb {
+    margin-top: 15px;
+    width: 100%;
+}
 </style>
