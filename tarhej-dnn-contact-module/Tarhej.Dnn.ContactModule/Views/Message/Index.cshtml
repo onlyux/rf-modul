@@ -6,9 +6,9 @@
 <a href="@Url.Action("SendEmail","Message")">Send email </a>
 <p>Összes üzenet: @ViewBag.totalMessages</p>
 <p>Nem megválaszolt üzenetek: @ViewBag.unansweredMessages</p>
-<a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = true })" class="btn btn-primary">Rendezés státusz szerint</a>
-<a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = false })" class="btn btn-primary">Rendezés beküldési idő szerint</a>
-<a href="@Url.Action("Index", "Message")" class="btn btn-primary">Frissítés</a>
+<a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = true })" class="btn btn-primary felso_gombok">Rendezés státusz szerint</a>
+<a href="@Url.Action("SortMessages", "Message", new { unansweredFirst = false })" class="btn btn-primary felso_gombok">Rendezés beküldési idő szerint</a>
+<a href="@Url.Action("Index", "Message")" class="btn btn-primary felso_gombok">Frissítés</a>
 <table>
     <thead>
         <tr>
@@ -43,6 +43,9 @@
 
 
 <style>
+    .felso_gombok{
+        margin-bottom: 15px;
+    }
     table, tr, td, th {
         padding: 10px;
     }
@@ -73,8 +76,8 @@
         text-decoration: none;
     }
 
-        td > a:hover {
-            color: #160f32;
-            transition: color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-        }
+    td > a:hover {
+        color: #160f32;
+        transition: color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    }
 </style>

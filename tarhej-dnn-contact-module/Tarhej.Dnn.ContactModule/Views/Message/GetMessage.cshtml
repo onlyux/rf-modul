@@ -12,21 +12,21 @@
 <h2>Beérkezett üzenet</h2>
 <div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_adatok beerkezett_fejlec">
     <div class="cimzett">
-        <p>Vezetéknév: @Model.LastName</p>
-        <p>Keresztnév: @Model.FirstName</p>
+        <p><strong>Vezetéknév:   </strong>@Model.LastName</p>
+        <p><strong>Keresztnév:   </strong>@Model.FirstName</p>
     </div>
-    <p> @Model.ContactDate</p>
+    <p><strong> @Model.ContactDate</strong></p>
 
 </div>
 <div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_adatok">
-    <p>Email: @Model.Email</p>
-    <p>Státusz: @Model.Status <a class="statusz_szerkesztese_link" href="@Url.Action("Edit","Message", new {ctl="Edit",MessageId = Model.MessageId })">Státusz szerkesztése</a></p>
+    <p><strong>Email:   </strong>@Model.Email</p>
+    <p><strong>Státusz:   </strong>@Model.Status <a class="statusz_szerkesztese_link" href="@Url.Action("Edit","Message", new {ctl="Edit",MessageId = Model.MessageId })">Státusz szerkesztése</a></p>
 
 
 </div>
 <div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_fontos_adatok">
-    <p>Tárgy: @Model.Subject</p>
-    <p>Termék: @Model.Product</p>
+    <p><strong>Tárgy:   </strong>@Model.Subject</p>
+    <p><strong>Termék:   </strong>@Model.Product</p>
 </div>
 <p class="uzenet">@Model.MessageContent</p>
 

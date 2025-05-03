@@ -40,10 +40,10 @@ ViewBag.Title = "Email küldése";
     <div class="ugyfelszolgalat_info">
         <div class="info_szovegek">
             <p class="ugyfelszolgalat_info_cim">Miben segíthetünk?</p>
-            <p class="ugyfelszolgalat_info_szoveg ugyfelszolgalat_bevezeto">Kérlek küldd el észrevételeidet ügyfélszolgálatunknak. Kéréseid, panaszaid kérlek oszd meg velünk, a megkeresésekre igyekszünk minél előbb válaszolni. Köszönjönk, hogy minket választott!  </p>
+            <p class="ugyfelszolgalat_info_szoveg ugyfelszolgalat_bevezeto">Kérlek küldd el észrevételeidet ügyfélszolgálatunknak. Kéréseid, panaszaid kérlek oszd meg velünk, a megkeresésekre igyekszünk minél előbb válaszolni. Köszönjük, hogy minket választott!  </p>
             <div class="ugyfelszolgalat_info_egy_lepes">
                 <p class="ugyfelszolgalat_info_cim">1.</p>
-                <p class="ugyfelszolgalat_info_szoveg">Nézd át az adatidat, amit automatikusan kitöltöttünk neked, ha valami elírást észlelsz akkor javítsd kérlek. Add meg a telefonszámod, ha szeretnéd, hogy személyesebben vegyük fel veled a kapcsolatot.</p>
+                <p class="ugyfelszolgalat_info_szoveg">Nézd át az adataidat, amit automatikusan kitöltöttünk neked, ha valami elírást észlelsz akkor javítsd kérlek.</p>
             </div>
             <div class="ugyfelszolgalat_info_egy_lepes">
                 <p class="ugyfelszolgalat_info_cim">2.</p>
@@ -95,12 +95,12 @@ ViewBag.Title = "Email küldése";
                 <label for="MessageContent">Ide írd az üzeneted, részletesen fejtsd ki az észrevételeidet * </label>
                 <textarea id="MessageContent" name="MessageContent" class="form-control" rows="5" required>@Model.MessageContent</textarea>
             </div>
-            <div class="form_egy_tomb">
+            <div class="captcha_ellenorzes">
                 <div>
                     <div class="g-recaptcha" data-sitekey="6LdRCysrAAAAAH9vQ0ML1d2MEdQiHGiY8cOUQHjV"></div>
                 </div>
             </div>
-            <button onclick="ScrollToTop()" id="formsubmit" type="submit" class="btn btn-primary form_bejelentes_gomb">Submit</button>
+            <button onclick="ScrollToTop()" id="formsubmit" type="submit" class="btn btn-primary form_bejelentes_gomb">Elküldés</button>
         </form>
     </div>
 </div>
@@ -129,19 +129,22 @@ ViewBag.Title = "Email küldése";
 
 </script>
 <style>
+    .captcha_ellenorzes {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .ugyfelszolgalat_kezdokep {
+        font-size: 50px;
         width: 100%;
-        height: 50vh;
-        background-color: url(Images/ModernOfficewithNaturalLight_kezdooldal.jpeg);
-        background-size: cover;
-        background-position: center;
+        height: 35vh;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: bold;
-        font-size: 50px;
         color: #160f32;
-        background-color: #5D3FD39e;
+        background-color: #5D3FD3;
     }
 
     .ugyfelszolgalat_layout {
@@ -187,6 +190,7 @@ ViewBag.Title = "Email küldése";
         background-color: #ff0000;
         background-size: cover;
         background-position: center;
+        background-image: url("@Url.Content("~/Portals/0/Images/telefonos_ember_support.svg")")
     }
 
     .ugyfelszolgalat_form {
@@ -214,28 +218,27 @@ ViewBag.Title = "Email küldése";
         flex-direction: column;
     }
 
-        .ugyfelszolgalat_form_group > input {
-            width: 300px;
-            margin: 5px 0 10px 0;
-            padding: 10px;
-            background-color: #F8F9FA;
-            ;
-        }
+    .ugyfelszolgalat_form_group > input {
+        width: 300px;
+        margin: 5px 0 10px 0;
+        padding: 10px;
+        background-color: #F8F9FA;
+    }
 
-        .ugyfelszolgalat_form_group > label {
-            margin-top: 15px;
-            color: #F8F9FA;
-        }
+    .ugyfelszolgalat_form_group > label {
+        margin-top: 15px;
+        color: #F8F9FA;
+    }
 
-        .ugyfelszolgalat_form_group > textarea {
-            width: 100%;
-            height: 100vh;
-            margin: 5px 0 10px 0;
-        }
+    .ugyfelszolgalat_form_group > textarea {
+        width: 100%;
+        height: 100vh;
+        margin: 5px 0 10px 0;
+    }
 
-        .ugyfelszolgalat_form_group > #Product {
-            width: 100%;
-        }
+    .ugyfelszolgalat_form_group > #Product {
+        width: 100%;
+    }
 
     .form_bejelentes_gomb {
         margin-top: 15px;
