@@ -137,12 +137,12 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
             var client = new System.Net.WebClient();
             var result = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={response}");
             var captchaResult = JsonConvert.DeserializeObject<dynamic>(result);
-            MessageManager.Instance.CreateItem(m);
             if (captchaResult.success != true)
             {
                 ViewBag.Error = "A CAPTCHA ellenőrzése sikertelen. Kérlek próbáld újra.";
                 return View(m);
             }
+            MessageManager.Instance.CreateItem(m);
             ViewBag.Message = "Üzenet sikeresen elküldve";
             return View(new Message());
         }
