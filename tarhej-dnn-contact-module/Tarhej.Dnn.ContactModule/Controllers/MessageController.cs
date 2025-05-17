@@ -125,12 +125,6 @@ namespace Tarhej.Dnn.Tarhej.Dnn.ContactModule.Controllers
         [HttpPost]
         public ActionResult AddItem(Message m)
         {
-            var currentUser = UserController.Instance.GetCurrentUserInfo();
-            if (currentUser == null || currentUser.UserID == -1)
-            {
-                ViewBag.Error = "Csak bejelentkezett felhasználók küldhetnek üzenetet";
-                return View(m);
-            }
             //Captcha
             var response = Request["g-recaptcha-response"];
             var secretKey = captchaKey;
