@@ -77,7 +77,8 @@
                     </div>
                     <div class="form-group form_egymas_alatt ugyfelszolgalat_form_group">
                         <label for="Email">Email *</label>
-                        <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+                        <input type="text" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+                        <span id="emailError" class="text-danger" style="display: none;">Kérlek, érvényes email címet adj meg!</span>
                     </div>
                 </div>
             </div>
@@ -126,9 +127,30 @@
             behavior: 'smooth'
         });
     }
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const emailInput = document.getElementById("Email");
+        const emailError = document.getElementById("emailError");
 
+        form.addEventListener("submit", function (event) {
+            const emailValue = emailInput.value.trim();
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+
+            if (!emailRegex.test(emailValue) || emailValue == "") {
+                event.preventDefault(); // Megakadályozza az űrlap elküldését
+                emailError.style.display = "block"; // Hibaüzenet megjelenítése
+                emailInput.focus();
+            } else {
+                emailError.style.display = "none"; // Hibaüzenet elrejtése, ha nincs hiba
+            }
+        });
+    });
 </script>
 <style>
+.text-danger{
+    color: white;
+}
+
 .captcha_ellenorzes {
     display: flex;
     align-items: center;
