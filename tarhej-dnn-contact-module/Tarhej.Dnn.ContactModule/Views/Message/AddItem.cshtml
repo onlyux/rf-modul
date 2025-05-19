@@ -1,0 +1,280 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Message>
+
+@using System.Collections.Generic
+@using DotNetNuke.Web.Mvc.Helpers
+@using Hotcakes.CommerceDTO.v1
+@using Hotcakes.CommerceDTO.v1.Catalog;
+@using Hotcakes.CommerceDTO.v1.Client;
+@using Microsoft.Web.Helpers
+
+
+@{
+    ViewBag.Title = "Email küldése";
+
+    string url = "http://" + DotNetNuke.Entities.Portals.PortalSettings.Current.PortalAlias.HTTPAlias + "/";
+    string key = "1-c4de6d11-f89c-40e7-82d8-cf7a1365cdd2";
+
+    Api proxy = new Api(url, key);
+    List<string> Products = new List<string>();
+    ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
+    var termekek = response.Content;
+    foreach (var item in termekek)
+    {
+        Products.Add(item.ProductName);
+    }
+
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+<div class="ugyfelszolgalat_kezdokep">
+    <h2 class="ugyfelszolgalat_kezdoszoveg">Üdvözöl a tárhej.hu ügyfélszolgálata!</h2>
+</div>
+<div class="ugyfelszolgalat_layout">
+    <div class="ugyfelszolgalat_info">
+        <div class="info_szovegek">
+            <p class="ugyfelszolgalat_info_cim">Miben segíthetünk?</p>
+            <p class="ugyfelszolgalat_info_szoveg ugyfelszolgalat_bevezeto">Kérlek küldd el észrevételeidet ügyfélszolgálatunknak. Kéréseid, panaszaid kérlek oszd meg velünk, a megkeresésekre igyekszünk minél előbb válaszolni. Köszönjük, hogy minket választott!  </p>
+            <div class="ugyfelszolgalat_info_egy_lepes">
+                <p class="ugyfelszolgalat_info_cim">1.</p>
+                <p class="ugyfelszolgalat_info_szoveg">Nézd át az adataidat, amit automatikusan kitöltöttünk neked, ha valami elírást észlelsz akkor javítsd kérlek.</p>
+            </div>
+            <div class="ugyfelszolgalat_info_egy_lepes">
+                <p class="ugyfelszolgalat_info_cim">2.</p>
+                <p class="ugyfelszolgalat_info_szoveg">Részletes írd le kérlek milyen észrevételed van, ugyanis ez alapján tudunk minél jobban segítséget nyújtani. Ha termékkel kapcsolatos a megjegyzésed, akkor válaszd ki a kapcsolódó termékeknél a megfelelőt.</p>
+            </div>
+            <div class="ugyfelszolgalat_info_egy_lepes">
+                <p class="ugyfelszolgalat_info_cim">3.</p>
+                <p class="ugyfelszolgalat_info_szoveg">Az üzeneted elküldéséhez kérlek azonosítsd magad, hogy nem vagy robot. A megkeresésre általában pár napon belül válaszolunk.</p>
+            </div>
+        </div>
+        <div class="ugyfelszolgalat_info_kep"></div>
+    </div>
+
+    <div class="ugyfelszolgalat_form">
+        <form action="@Url.Action("Additem", "Message")" method="post">
+            <div class="form_egy_tomb">
+                <div class="form_egyoszlopba_input">
+                    <div class="form-group form_egymas_alatt ugyfelszolgalat_form_group">
+                        <label for="LastName">Vezetéknév *</label>
+                        <input type="text" id="LastName" name="LastName" class="form-control" value="@Model.LastName" required />
+                    </div>
+                    <div class="form-group form_egymas_alatt ugyfelszolgalat_form_group">
+                        <label for="Subject">Tárgy *</label>
+                        <input type="text" id="Subject" name="Subject" class="form-control" value="@Model.Subject" required />
+                    </div>
+                </div>
+                <div class="form_egyoszlopba_input">
+                    <div class="form-group form_egymas_alatt ugyfelszolgalat_form_group">
+                        <label for="FirstName">Keresztnév *</label>
+                        <input type="text" id="FirstName" name="FirstName" class="form-control" value="@Model.FirstName" required />
+                    </div>
+                    <div class="form-group form_egymas_alatt ugyfelszolgalat_form_group">
+                        <label for="Email">Email *</label>
+                        <input type="text" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+                        <span id="emailError" class="text-danger" style="display: none;">Kérlek, érvényes email címet adj meg!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form_szeles_input ugyfelszolgalat_form_group" id="termek_valasztas_kulso">
+                <label for="Product">Válaszd ki a kapcsolódó terméket (opcionális)</label>
+                <select id="Product" name="Product" class="form-control">
+                    <option value="nincs termék">Nem termékkel kapcsolatos</option>
+                    @foreach (var termek in Products)
+                    {
+                        <option value="@termek" @(termek == Model.Product ? "selected" : "")>@termek</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group from_hosszu_uzenet ugyfelszolgalat_form_group">
+                <label for="MessageContent">Ide írd az üzeneted, részletesen fejtsd ki az észrevételeidet * </label>
+                <textarea id="MessageContent" name="MessageContent" class="form-control" rows="5" required>@Model.MessageContent</textarea>
+            </div>
+            <div class="captcha_ellenorzes">
+                <div>
+                    <div class="g-recaptcha" data-sitekey="6LdRCysrAAAAAH9vQ0ML1d2MEdQiHGiY8cOUQHjV"></div>
+                </div>
+            </div>
+            <button onclick="ScrollToTop()" id="formsubmit" type="submit" class="btn btn-primary form_bejelentes_gomb">Elküldés</button>
+        </form>
+    </div>
+</div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function (event) {
+            const errorMessage = document.querySelector(".alert-danger");
+            if (errorMessage) {
+                reloadCaptcha();
+            }
+        });
+    });
+
+    function reloadCaptcha() {
+        grecaptcha.reset();
+    }
+
+    function ScrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const emailInput = document.getElementById("Email");
+        const emailError = document.getElementById("emailError");
+
+        form.addEventListener("submit", function (event) {
+            const emailValue = emailInput.value.trim();
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+
+            if (!emailRegex.test(emailValue) || emailValue == "") {
+                event.preventDefault(); // Megakadályozza az űrlap elküldését
+                emailError.style.display = "block"; // Hibaüzenet megjelenítése
+                emailInput.focus();
+            } else {
+                emailError.style.display = "none"; // Hibaüzenet elrejtése, ha nincs hiba
+            }
+        });
+    });
+</script>
+<style>
+
+    #termek_valasztas_kulso::after {
+        content: "▼";
+        font-size: 14px;
+        color: white;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .text-danger {
+        color: white;
+    }
+
+.captcha_ellenorzes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ugyfelszolgalat_kezdokep {
+    font-size: 50px;
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #160f32;
+    background-color: #5D3FD3;
+}
+
+.ugyfelszolgalat_layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ugyfelszolgalat_info {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px 30px;
+}
+
+.ugyfelszolgalat_info_cim {
+    text-align: center;
+    font-size: 30px;
+    color: #5D3FD3;
+}
+
+.ugyfelszolgalat_info_szoveg {
+    text-align: center;
+    color: #5D3FD3;
+    width: 90%;
+}
+
+.ugyfelszolgalat_bevezeto {
+    margin-bottom: 30vh;
+    width: 100%;
+}
+
+.ugyfelszolgalat_info_egy_lepes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ugyfelszolgalat_info_kep {
+    width: 100%;
+    height: 50vh;
+    background-color: #ff0000;
+    background-size: cover;
+    background-position: center;
+    background-image: url("@Url.Content("~/Portals/0/Images/telefonos_ember_support.svg")")
+}
+
+.ugyfelszolgalat_form {
+    background-color: #5D3FD3;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 30px 100px;
+}
+
+.form_egy_tomb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_egyoszlopba_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.ugyfelszolgalat_form_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.ugyfelszolgalat_form_group > input {
+    width: 300px;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+    background-color: #F8F9FA;
+}
+
+.ugyfelszolgalat_form_group > label {
+    margin-top: 15px;
+    color: #F8F9FA;
+}
+
+.ugyfelszolgalat_form_group > textarea {
+    width: 100%;
+    height: 100vh;
+    margin: 5px 0 10px 0;
+}
+
+.ugyfelszolgalat_form_group > #Product {
+    width: 100%;
+}
+
+.form_bejelentes_gomb {
+    margin-top: 15px;
+    width: 100%;
+}
+</style>

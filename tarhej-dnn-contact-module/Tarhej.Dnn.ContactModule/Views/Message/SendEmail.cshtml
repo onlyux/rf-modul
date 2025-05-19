@@ -1,0 +1,92 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.EmailViewModel>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<h2 class="ugyfelszolgalat_kezdoszoveg">Válasz e-mail küldése</h2>
+<div class="email_visszakuldes_form">
+    <form action="@Url.Action("SendEmail", "Message")" method="post">
+        @Html.AntiForgeryToken()
+        <div class="fejlec">
+            <div class="form-group">
+                <label for="Subject">Tárgy</label>
+                <input type="text" id="Subject" name="Subject" class="form-control" value="@Model.Subject" required />
+            </div>
+            <div class="form-group">
+                <label for="Email">Címzett Email</label>
+                <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Message">Válasz üzenet</label>
+            <textarea id="Message" name="Message" class="form-control" rows="5" required>@Model.Message</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary email_visszakuldes_gomb">Küldés</button>
+    </form>
+</div>
+<style>
+    .email_visszakuldes_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    background-color: #5D3FD3;
+    padding-top: 30px;
+}
+
+.email_visszakuldes_form > .fejlec {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    margin-left: 100px;
+}
+
+.email_visszakuldes_form > .fejlec > .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.email_visszakuldes_form > .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.email_visszakuldes_form > .fejlec > .form-group > input {
+    width: 300px;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+    background-color: #F8F9FA;
+}
+
+.email_visszakuldes_form > .fejlec > .form-group > label {
+    margin-top: 15px;
+    color: #F8F9FA;
+}
+
+.email_visszakuldes_form > .form-group > label {
+    margin: 15px 0 0 100px;
+    color: #F8F9FA;
+}
+
+.email_visszakuldes_form > .form-group > textarea {
+    width: 60%;
+    height: 100vh;
+    margin: 5px 0 10px 100px;
+}
+
+.email_visszakuldes_gomb {
+    width: 60%;
+    margin: 15px 0 15px 100px;
+}
+
+</style>

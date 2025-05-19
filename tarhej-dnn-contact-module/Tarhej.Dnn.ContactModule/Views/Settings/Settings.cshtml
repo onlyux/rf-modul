@@ -1,4 +1,4 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage <Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Settings>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Settings>
 
 @using DotNetNuke.Web.Mvc.Helpers
 
@@ -6,15 +6,16 @@
 <fieldset>
     <div class="dnnFormItem">
         <div class="dnnLabel" style="position: relative;">
-            @Html.LabelFor(m => Model.Setting1, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => Model.DefaultView, new { @class = "col-md-2 control-label" })
         </div>
-        @Html.CheckBoxFor(m => Model.Setting1)
-    </div>
-    <div class="dnnFormItem">
-        <div class="dnnLabel" style="position: relative;">
-            @Html.LabelFor(m => Model.Setting2, new { @class = "col-md-2 control-label" })
-        </div>
-        @Html.TextBoxFor(m => Model.Setting2)
+        @Html.DropDownListFor(
+            m => Model.DefaultView,
+            new SelectList(new[]
+            {
+                new { Value = "Index", Text = "Index" },
+                new { Value = "Additem", Text = "Add Item" },
+            }, "Value", "Text", Model.DefaultView),
+            new { @class = "form-control" }
+        )
     </div>
 </fieldset>
-

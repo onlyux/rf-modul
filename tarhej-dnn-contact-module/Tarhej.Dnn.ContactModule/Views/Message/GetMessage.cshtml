@@ -1,0 +1,66 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Tarhej.Dnn.Tarhej.Dnn.ContactModule.Models.Message>
+
+
+@using System.Collections.Generic
+@using DotNetNuke.Web.Mvc.Helpers
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+@{
+    ViewBag.Title = "Üzenet megtekintés";
+}
+
+<h2>Beérkezett üzenet</h2>
+<div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_adatok beerkezett_fejlec">
+    <div class="cimzett">
+        <p><strong>Vezetéknév:   </strong>@Model.LastName</p>
+        <p><strong>Keresztnév:   </strong>@Model.FirstName</p>
+    </div>
+    <p><strong> @Model.ContactDate</strong></p>
+
+</div>
+<div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_adatok">
+    <p><strong>Email:   </strong>@Model.Email</p>
+    <p><strong>Státusz:   </strong>@Model.Status <a class="statusz_szerkesztese_link" href="@Url.Action("Edit","Message", new {ctl="Edit",MessageId = Model.MessageId })">Státusz szerkesztése</a></p>
+
+
+</div>
+<div class="ugyfelszolgalat_beerkezett_uzenet beerkezett_fontos_adatok">
+    <p><strong>Tárgy:   </strong>@Model.Subject</p>
+    <p><strong>Termék:   </strong>@Model.Product</p>
+</div>
+<p class="uzenet">@Model.MessageContent</p>
+
+<h3 class="ugyfelszolgalat_pixel_cim">Válasz email küldése</h3>
+
+<a href="@Url.Action("SendEmail", "Message", new { email = Model.Email, subject = "VÁLASZ: " + Model.Subject })" class="btn btn-primary">Email küldése</a>
+<style>
+    .ugyfelszolgalat_beerkezett_uzenet {
+        display: flex;
+        width: 100%;
+    }
+
+        .ugyfelszolgalat_beerkezett_uzenet > p, .beerkezett_fejlec > .cimzett > p {
+            padding: 0 50px 0 10px;
+        }
+
+    .beerkezett_fejlec {
+        justify-content: space-between;
+    }
+
+        .beerkezett_fejlec > .cimzett {
+            display: flex;
+        }
+
+    .beerkezett_adatok > p {
+        margin: 2px 0;
+    }
+
+    .beerkezett_fontos_adatok {
+        margin-top: 20px 0;
+    }
+
+    .ugyfelszolgalat_pixel_cim {
+        font-size: 30px;
+    }
+</style>
